@@ -45,4 +45,4 @@ class TestList():
         assert len(l) == 0
         l = l + list(random_string)
         assert len(l) > 0
-        assert random_string[random.randint(0,len(random_string))] in l
+        assert random_string[random.randint(0,len(random_string)-1)] in l
