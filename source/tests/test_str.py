@@ -32,5 +32,5 @@ class TestStr():
 
     @pytest.mark.parametrize('c', list('abcd'))
     def test_7(self, c, random_string):
-        """Тест на проверку метода join"""
-        assert random_string.join(c) == random_string + c
+        """Тест на проверку метода islower"""
+        assert c.islower()
