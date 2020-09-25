@@ -37,8 +37,8 @@ class TestInt:
 
         with pytest.raises(TypeError):
             assert random_value + random_string
-    
+
     def test_7(self, random_value):
         """Тест на проверку деления с остатком (%)"""
-        
-        assert random_value % 10 == random_value - ( random_value // 10 ) * 10
+
+        assert random_value % 10 == random_value - (random_value // 10) * 10
