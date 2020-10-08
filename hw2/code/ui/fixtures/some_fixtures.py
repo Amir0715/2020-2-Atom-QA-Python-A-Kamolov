@@ -1,4 +1,5 @@
 from base_page import BasePage
+from locators import MainPageLocators
 from main_page import MainPage
 from cabinet_page import CabinetPage
 import pytest

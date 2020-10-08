@@ -1,12 +1,17 @@
 from base_page import BasePage
 from locators import CabinetPageLocators
-from main_page import MainPage
+
+EMAIL = 'kamolov.amir2000@yandex.ru'
+PASSWORD = 'x4r-zbC-SYM-gj8'
+
 
 class CabinetPage(BasePage):
     locators = CabinetPageLocators()
 
     def __init__(self, driver):
-        self = MainPage.auth(MainPage, MainPage.locators.BUTTON_AUTH_BODY_LOCATOR, 'kamolov.amir2000@yandex.ru', 'x4r-zbC-SYM-gj8')
+        self.driver = driver
+        
+        # self.auth(self.locators.BUTTON_AUTH_BODY_LOCATOR, EMAIL, PASSWORD)
     
         
 

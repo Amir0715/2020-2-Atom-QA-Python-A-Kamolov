@@ -15,3 +15,5 @@ class BaseCase:
         self.base_page: BasePage = request.getfixturevalue('base_page')
         self.main_page: MainPage = request.getfixturevalue('main_page')
         self.cabinet_page: CabinetPage = request.getfixturevalue('cabinet_page')
+
+    
