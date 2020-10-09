@@ -1,9 +1,9 @@
+import pytest
 from audience_page import AudiencePage
 from base_page import BasePage
 from main_page import MainPage
 from cabinet_page import CabinetPage
 from _pytest.fixtures import FixtureRequest
-import pytest
 
 
 class BaseCase:

@@ -1,8 +1,10 @@
-from os import name
-from audience_page import AudiencePage
+import datetime
+import time
 import pytest
-from base import BaseCase
+from selenium.webdriver.common.by import By
 from some_fixtures import *
+from base import BaseCase
+from audience_page import AudiencePage
 from cabinet_page import CabinetPage
 
 
@@ -22,8 +24,7 @@ class Test(BaseCase):
     def test_positive_auth_via_button(self, BUTTON_LOCATOR : str):
         locator = getattr(self.base_page.locators, BUTTON_LOCATOR)
         self.base_page.auth(self.base_page.EMAIL, self.base_page.PASSWORD, locator)
-        self.cabinet_page.find(self.cabinet_page.locators.DIV_INSTROCTION_LOCATOR)
-        assert self.base_page.EMAIL in self.driver.page_source
+        assert self.cabinet_page.check_auth()
 
     
     # @pytest.mark.skip
@@ -54,22 +55,34 @@ class Test(BaseCase):
     def test_create_segment(self, auto_auth):
         self.cabinet_page : CabinetPage = auto_auth
         self.cabinet_page.go_to_audience()
-        name = 'Test segment'
+        name = 'Test segment ' + datetime.datetime.today().strftime("%H:%M:%S:%f")
+        xpath = '//a[@title="' + name + '"]'
+        TEST_SEGMENT_LOCATOR = (By.XPATH, xpath)
+        self.cabinet_page.go_to_audience()
         self.audience_page.create_segment(name)
-        self.audience_page.find(self.audience_page.locators.TEST_SEGMENT_LOCATOR).click()
-        # assert name in self.driver.page_source
+        self.cabinet_page.go_to_audience()
+        assert self.base_page.check_locator_to_clickcable(TEST_SEGMENT_LOCATOR)
+        self.cabinet_page.go_to_audience()
+        self.audience_page.click(TEST_SEGMENT_LOCATOR)
         assert "Редактирование аудиторного сегмента" in self.driver.page_source
-        self.audience_page.delete_segment()
 
     # @pytest.mark.skip
     def test_delete_segment(self, auto_auth):
         self.cabinet_page : CabinetPage = auto_auth
         self.cabinet_page.go_to_audience()
-        name = 'Test segment'
+
+        name = 'Test segment ' + datetime.datetime.today().strftime("%H:%M:%S:%f")
+        xpath = '//a[@title="'+name+'"]'
+        TEST_SEGMENT_LOCATOR = (By.XPATH,xpath)
+        self.cabinet_page.go_to_audience()
         self.audience_page.create_segment(name)
-        self.audience_page.find(self.audience_page.locators.TEST_SEGMENT_LOCATOR).click()
+        self.cabinet_page.go_to_audience()
+        assert self.base_page.check_locator_to_clickcable(TEST_SEGMENT_LOCATOR)
+        self.cabinet_page.go_to_audience()
+        self.audience_page.click(TEST_SEGMENT_LOCATOR)
         assert "Редактирование аудиторного сегмента" in self.driver.page_source
-        self.audience_page.delete_segment()
-        assert "С чего начать?"
+
+        self.audience_page.delete_segment(name)
+        assert "С чего начать?" in self.driver.page_source
 
         

@@ -1,11 +1,12 @@
-from selenium.common.exceptions import StaleElementReferenceException
+import selenium
+from selenium.common.exceptions import StaleElementReferenceException, TimeoutException
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 
 from locators import BasePageLocators
 
-RETRY = 3
+RETRY = 5
 
 class BasePage(object):
 
@@ -27,12 +28,13 @@ class BasePage(object):
                 element.click()
                 return
             except StaleElementReferenceException:
-                if i < RETRY - 1 : 
-                    pass
+                if i > RETRY - 1 : 
+                    raise
+                
 
     def wait(self, timeout=None):
         if timeout is None:
-            timeout = 5
+            timeout = 10
         return WebDriverWait(self.driver, timeout=timeout)
 
     def write(self, locatorInput, keys):
@@ -46,5 +48,5 @@ class BasePage(object):
         self.write(self.locators.INPUT_PASSWORD_AUTH_LOCATOR, password)
         self.click(self.locators.BUTTON_LOG_IN_LOCATOR)
     
-
-
+    def check_locator_to_clickcable(self, locator, timeout=None):
+        return self.find(locator,timeout).is_displayed()
