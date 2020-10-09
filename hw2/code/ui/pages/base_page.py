@@ -16,6 +16,7 @@ class BasePage(object):
         self.driver = driver
         self.EMAIL = 'kamolov.amir2000@yandex.ru'
         self.PASSWORD = 'x4r-zbC-SYM-gj8'
+        self.path_to_file='/home/amir-kamolov/photo/cat.jpg'
 
     def find(self, locator, timeout=None) -> WebElement:
         return self.wait(timeout).until(expected_conditions.presence_of_element_located(locator))
@@ -48,5 +49,8 @@ class BasePage(object):
         self.write(self.locators.INPUT_PASSWORD_AUTH_LOCATOR, password)
         self.click(self.locators.BUTTON_LOG_IN_LOCATOR)
     
-    def check_locator_to_clickcable(self, locator, timeout=None):
+    def check_locator_to_displayed(self, locator, timeout=None):
         return self.find(locator,timeout).is_displayed()
+
+    def check_locator_to_selected(self, locator, timeout=None):
+        return self.find(locator,timeout).is_selected()

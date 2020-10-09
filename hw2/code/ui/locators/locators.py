@@ -20,16 +20,21 @@ class CabinetPageLocators(BasePageLocators):
     BUTTON_HELP_LOCATOR = (By.XPATH, '//a[@href="//target.my.com/help/advertisers/ru"]')
     DIV_INSTROCTION_LOCATOR = (By.XPATH, '//div[@class="instruction-module-title-zPmY3V"]')
 
-class MainPageLocators(BasePageLocators):
-    pass
-
 
 class ProPageLocators(BasePageLocators):
     pass
 
 
 class CampaignPageLocators(CabinetPageLocators):
-    pass
+    CAMPAIGN_TRAFIC_LOCATOR = (By.XPATH, '//div[contains(@class, "_traffic")]')
+    INPUT_URL_ADS_LOCATOR = (By.XPATH, '/html/body/div[1]/div[2]/div[1]/div/div[2]/div[2]/div[2]/div/div[1]/div[2]/div/div[4]/div[2]/div/div[3]/div[1]/div/div[1]/div/div/input')
+    INPUT_NAME_CAMPAIGN_LOCATOR = (By.XPATH, '/html/body/div[1]/div[2]/div[1]/div/div[2]/div[2]/div[2]/div/div[1]/div[2]/div/div[4]/div[2]/div/div[9]/div/div[2]/div/div[2]/input')
+    FORMAT_BANER_LOCATOR = (By.XPATH, '//div[@id="patterns_4"]')
+    BUTTON_FOOTER_CREATE_CAMPAIGN_LOCATOR = (By.XPATH, '/html/body/div[1]/div[2]/div[1]/div/div[2]/div[2]/div[2]/div/div[2]/div[2]/div[3]/div[1]/div[1]/button')
+    BUTTON_GO_TO_CREATE_CAMPAIGN_LOCATOR = (By.XPATH, '/html/body/div[1]/div/div[2]/div[2]/div/div/div[1]/div/div[1]/div[1]/div[1]/div/div')
+    INPUT_UPLOAD_IMAGE_LOCATOR = (By.XPATH, '//input[@type="file" and @data-test="image_240x400"]')
+    BUTTON_SAVE_ADS_LOCATOR = (By.XPATH, '/html/body/div[1]/div[2]/div[1]/div/div[2]/div[2]/div[2]/div/div[1]/div[2]/div/div[4]/div[6]/div/div[4]/div/div[3]/div[1]/div')
+    INPUT_CLEAR_BUTTON_LOCATOR = (By.XPATH, '//div[contains(@class, "input__clear")]')
 
 class AudiencePageLocators(CabinetPageLocators):
     CHECK_BOX_LOCATOR = (By.XPATH,'/html/body/div[1]/div[4]/div/div[2]/div/div[2]/div/div[2]/div[2]/div/div[2]/div/div/div[1]/input')

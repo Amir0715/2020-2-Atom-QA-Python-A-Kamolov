@@ -1,6 +1,6 @@
-from cabinet_page import CabinetPage
-from locators import AudiencePageLocators
 from selenium.webdriver.common.by import By
+from locators import AudiencePageLocators
+from cabinet_page import CabinetPage
 
 class AudiencePage(CabinetPage):
     locators = AudiencePageLocators()
@@ -10,9 +10,9 @@ class AudiencePage(CabinetPage):
     # //div[@data-test="id-100378 row-100378"]
 
     def create_segment(self,name):
-        if self.check_locator_to_clickcable(self.locators.HREF_CREATE_SEGMENT_LOCATOR):
+        if self.check_locator_to_displayed(self.locators.HREF_CREATE_SEGMENT_LOCATOR):
             self.click(self.locators.HREF_CREATE_SEGMENT_LOCATOR)
-        elif self.check_locator_to_clickcable(self.locators.BUTTON_CREATE_SEGMENT_LOCATOR):
+        elif self.check_locator_to_displayed(self.locators.BUTTON_CREATE_SEGMENT_LOCATOR):
             self.click(self.locators.BUTTON_CREATE_SEGMENT_LOCATOR)
             self.click(self.locators.DIV_APPS_AND_GAMES_LOCATOR)
         else:
@@ -34,11 +34,12 @@ class AudiencePage(CabinetPage):
     
     
     def remove_all(self):
-        if self.check_locator_to_clickcable(self.locators.BUTTON_ACTIONS_LOCATOR):
+        if self.check_locator_to_displayed(self.locators.BUTTON_ACTIONS_LOCATOR):
             self.click(self.locators.CHECKBOX_ALL_SELECT_LOCATOR)
             self.click(self.locators.BUTTON_ACTIONS_LOCATOR)
             self.click(self.locators.BUTTON_REMOVE_SELECTER_LOCATOR)
         return
 
     def cheack_segment(self, name):
+        # TODO:
         pass

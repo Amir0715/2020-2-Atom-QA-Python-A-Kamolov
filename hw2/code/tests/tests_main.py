@@ -2,14 +2,13 @@ import datetime
 import time
 import pytest
 from selenium.webdriver.common.by import By
+
 from some_fixtures import *
 from base import BaseCase
-from audience_page import AudiencePage
 from cabinet_page import CabinetPage
 
 
-class Test(BaseCase):
-    
+class Test(BaseCase):    
     
     # @pytest.mark.skip
     @pytest.mark.parametrize('BUTTON_LOCATOR' , ['BUTTON_AUTH_BODY_LOCATOR', 'BUTTON_AUTH_HEADER_LOCATOR'] )
@@ -58,11 +57,8 @@ class Test(BaseCase):
         name = 'Test segment ' + datetime.datetime.today().strftime("%H:%M:%S:%f")
         xpath = '//a[@title="' + name + '"]'
         TEST_SEGMENT_LOCATOR = (By.XPATH, xpath)
-        self.cabinet_page.go_to_audience()
         self.audience_page.create_segment(name)
-        self.cabinet_page.go_to_audience()
-        assert self.base_page.check_locator_to_clickcable(TEST_SEGMENT_LOCATOR)
-        self.cabinet_page.go_to_audience()
+        assert self.base_page.check_locator_to_displayed(TEST_SEGMENT_LOCATOR)
         self.audience_page.click(TEST_SEGMENT_LOCATOR)
         assert "Редактирование аудиторного сегмента" in self.driver.page_source
 
@@ -70,19 +66,35 @@ class Test(BaseCase):
     def test_delete_segment(self, auto_auth):
         self.cabinet_page : CabinetPage = auto_auth
         self.cabinet_page.go_to_audience()
-
         name = 'Test segment ' + datetime.datetime.today().strftime("%H:%M:%S:%f")
         xpath = '//a[@title="'+name+'"]'
         TEST_SEGMENT_LOCATOR = (By.XPATH,xpath)
-        self.cabinet_page.go_to_audience()
         self.audience_page.create_segment(name)
-        self.cabinet_page.go_to_audience()
-        assert self.base_page.check_locator_to_clickcable(TEST_SEGMENT_LOCATOR)
-        self.cabinet_page.go_to_audience()
+        assert self.base_page.check_locator_to_displayed(TEST_SEGMENT_LOCATOR)
         self.audience_page.click(TEST_SEGMENT_LOCATOR)
         assert "Редактирование аудиторного сегмента" in self.driver.page_source
 
         self.audience_page.delete_segment(name)
         assert "С чего начать?" in self.driver.page_source
 
+    
+    def test_create_campaign(self, auto_auth):
+        self.cabinet_page : CabinetPage = auto_auth
+        self.cabinet_page.go_to_campaigns()
+
+        name = 'Test campaign ' + datetime.datetime.today().strftime("%H:%M:%S:%f")
+
+        self.campaign_page.create_campaign(name,self.base_page.path_to_file)
+        assert self.campaign_page.check_campaign(name)
+
+    def test_delete_campaign(self,auto_auth):
+        self.cabinet_page : CabinetPage = auto_auth
+        self.cabinet_page.go_to_campaigns()
+
+        name = 'Test campaign ' + datetime.datetime.today().strftime("%H:%M:%S:%f")
+
+        self.campaign_page.create_campaign(name,self.base_page.path_to_file)
+        assert self.campaign_page.check_campaign(name)
+        # TODO: COMPLITE
         
+    

@@ -1,17 +1,13 @@
+import pytest
 from audience_page import AudiencePage
 from base_page import BasePage
-from main_page import MainPage
+from campaign_page import CampaignPage
 from cabinet_page import CabinetPage
-import pytest
 
 
 @pytest.fixture
 def base_page(driver):
     return BasePage(driver)
-    
-@pytest.fixture
-def main_page(driver):
-    return MainPage(driver)
     
 @pytest.fixture
 def cabinet_page(driver):
@@ -20,6 +16,10 @@ def cabinet_page(driver):
 @pytest.fixture
 def audience_page(driver):
     return AudiencePage(driver)
+
+@pytest.fixture
+def campaign_page(driver):
+    return CampaignPage(driver)
 
 @pytest.fixture
 def auto_auth(driver):

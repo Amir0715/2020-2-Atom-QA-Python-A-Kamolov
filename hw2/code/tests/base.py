@@ -1,9 +1,9 @@
 import pytest
+from _pytest.fixtures import FixtureRequest
 from audience_page import AudiencePage
 from base_page import BasePage
-from main_page import MainPage
+from campaign_page import CampaignPage
 from cabinet_page import CabinetPage
-from _pytest.fixtures import FixtureRequest
 
 
 class BaseCase:
@@ -14,7 +14,6 @@ class BaseCase:
         self.config = config
 
         self.base_page: BasePage = request.getfixturevalue('base_page')
-        self.main_page: MainPage = request.getfixturevalue('main_page')
         self.cabinet_page: CabinetPage = request.getfixturevalue('cabinet_page')
         self.audience_page : AudiencePage = request.getfixturevalue('audience_page')
-    
+        self.campaign_page : CampaignPage = request.getfixturevalue('campaign_page')
