@@ -13,16 +13,22 @@ class BasePage(object):
 
     def __init__(self, driver):
         self.driver = driver
+        self.EMAIL = 'kamolov.amir2000@yandex.ru'
+        self.PASSWORD = 'x4r-zbC-SYM-gj8'
 
     def find(self, locator, timeout=None) -> WebElement:
         return self.wait(timeout).until(expected_conditions.presence_of_element_located(locator))
 
     def click(self, locator, timeout=None):
-        try:
-            element = self.find(locator)
-            element.click()
-        except StaleElementReferenceException:
-            pass
+        for i in range(RETRY):
+            try:
+                self.find(locator)
+                element = self.wait(timeout).until(expected_conditions.element_to_be_clickable(locator))
+                element.click()
+                return
+            except StaleElementReferenceException:
+                if i < RETRY - 1 : 
+                    pass
 
     def wait(self, timeout=None):
         if timeout is None:
@@ -30,13 +36,15 @@ class BasePage(object):
         return WebDriverWait(self.driver, timeout=timeout)
 
     def write(self, locatorInput, keys):
-        try:
-            element = self.find(locatorInput)
-            element.send_keys(keys)
-        except StaleElementReferenceException:
-            pass
-    
-    
+        element = self.find(locatorInput)
+        element.clear()
+        element.send_keys(keys)
+
+    def auth(self,email,password,locator=locators.BUTTON_AUTH_HEADER_LOCATOR):
+        self.click(locator)
+        self.write(self.locators.INPUT_EMAIL_AUTH_LOCATOR, email)
+        self.write(self.locators.INPUT_PASSWORD_AUTH_LOCATOR, password)
+        self.click(self.locators.BUTTON_LOG_IN_LOCATOR)
     
 
 

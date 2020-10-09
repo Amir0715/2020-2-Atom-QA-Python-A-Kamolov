@@ -1,17 +1,15 @@
+# from audience_page import AudiencePage
 from base_page import BasePage
 from locators import CabinetPageLocators
-
-EMAIL = 'kamolov.amir2000@yandex.ru'
-PASSWORD = 'x4r-zbC-SYM-gj8'
 
 
 class CabinetPage(BasePage):
     locators = CabinetPageLocators()
 
-    def __init__(self, driver):
-        self.driver = driver
+    def go_to_audience(self):
+        self.click(self.locators.BUTTON_AUDIENCE_LOCATOR)
         
-        # self.auth(self.locators.BUTTON_AUTH_BODY_LOCATOR, EMAIL, PASSWORD)
+
     
         
 

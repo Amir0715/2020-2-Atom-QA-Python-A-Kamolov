@@ -1,3 +1,4 @@
+from audience_page import AudiencePage
 from base_page import BasePage
 from main_page import MainPage
 from cabinet_page import CabinetPage
@@ -11,9 +12,9 @@ class BaseCase:
     def setup(self,driver,config,request:FixtureRequest):
         self.driver = driver
         self.config = config
-        
+
         self.base_page: BasePage = request.getfixturevalue('base_page')
         self.main_page: MainPage = request.getfixturevalue('main_page')
         self.cabinet_page: CabinetPage = request.getfixturevalue('cabinet_page')
-
+        self.audience_page : AudiencePage = request.getfixturevalue('audience_page')
     
