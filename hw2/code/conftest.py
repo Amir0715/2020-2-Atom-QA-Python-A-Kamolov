@@ -30,8 +30,8 @@ def driver(config):
                 "browserName": "chrome",
                 "browserVersion": "80.0",
                 "selenoid:options": {
-                    "enableVNC": True,
-                    "enableVideo": True
+                    "enableVNC": False,
+                    "enableVideo": False
             }   
         }   
         selenoid_url = 'http://' + config['selenoid'] + '/wd/hub'
