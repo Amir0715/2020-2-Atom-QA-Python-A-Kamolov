@@ -9,8 +9,6 @@ class AudiencePage(CabinetPage):
     locators = AudiencePageLocators()
 
 
-    # //span[@class="icon-cross"] 
-    # //div[@data-test="id-100378 row-100378"]
     def create_segment(self,name):
         if self.check_locator_to_displayed(self.locators.HREF_CREATE_SEGMENT_LOCATOR):
             self.click(self.locators.HREF_CREATE_SEGMENT_LOCATOR)
@@ -55,8 +53,6 @@ class AudiencePage(CabinetPage):
             self.click(LI_SEGMENT_SEARCH_LOCATOR)
         if self.check_locator_to_displayed(TEST_SEGMENT_LOCATOR) :
             self.click(TEST_SEGMENT_LOCATOR)
-            element = self.find(self.locators.INPUT_EDIT_NAME_SEGMENT_LOCATOR)
-            name_tmp = element.get_attribute("value")
-            return name_tmp == name
+            return True
         else: 
             return False 
