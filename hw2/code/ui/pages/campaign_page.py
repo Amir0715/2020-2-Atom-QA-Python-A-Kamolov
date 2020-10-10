@@ -21,11 +21,3 @@ class CampaignPage(CabinetPage):
         xpath = '//a[contains(@title,"' + name + '" )]/../label/input[@checked]'
         TOGGLE_CHECKED_CAMPAIGN_LOCATOR = (By.XPATH, xpath)
         return self.check_locator_to_selected(TOGGLE_CHECKED_CAMPAIGN_LOCATOR)
-
-    def search_campaign(self, name):
-        # TODO:
-        pass
-
-    def delete_campaign(self,name):
-        # TODO:
-        pass

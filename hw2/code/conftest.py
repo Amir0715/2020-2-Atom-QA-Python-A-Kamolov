@@ -11,12 +11,14 @@ from webdriver_manager.chrome import ChromeDriverManager
 def config(request):
     url = request.config.getoption('--url')
     selenoid = request.config.getoption('--selenoid')
-    return {'url': url, 'selenoid' : selenoid, 'download_dir': '/tmp'}
+    download_dir = request.config.getoption('--download_dir')
+    return {'url': url, 'selenoid' : selenoid, 'download_dir': download_dir}
 
 
 def pytest_addoption(parser):
     parser.addoption('--url', default='https://target.my.com')
     parser.addoption('--selenoid', default=None)
+    parser.addoption('--download_dir', default='/tmp')
 
 
 @pytest.fixture(scope='function')

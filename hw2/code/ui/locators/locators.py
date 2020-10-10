@@ -36,6 +36,10 @@ class CampaignPageLocators(CabinetPageLocators):
     BUTTON_SAVE_ADS_LOCATOR = (By.XPATH, '/html/body/div[1]/div[2]/div[1]/div/div[2]/div[2]/div[2]/div/div[1]/div[2]/div/div[4]/div[6]/div/div[4]/div/div[3]/div[1]/div')
     INPUT_CLEAR_BUTTON_LOCATOR = (By.XPATH, '//div[contains(@class, "input__clear")]')
 
+    INPUT_SEARCH_CAMPAIGN_LOCATOR = (By.XPATH, '//input[contains(@class,"searchInput")]')
+    
+
+
 class AudiencePageLocators(CabinetPageLocators):
     CHECK_BOX_LOCATOR = (By.XPATH,'/html/body/div[1]/div[4]/div/div[2]/div/div[2]/div/div[2]/div[2]/div/div[2]/div/div/div[1]/input')
     HREF_CREATE_SEGMENT_LOCATOR = (By.XPATH, '//a[@href="/segments/segments_list/new/"]')
@@ -53,3 +57,5 @@ class AudiencePageLocators(CabinetPageLocators):
     CHECKBOX_ALL_SELECT_LOCATOR = (By.XPATH, '//input[@type="checkbox"][1]')
     BUTTON_ACTIONS_LOCATOR = (By.XPATH, '//div[1][@data-test="select"]')
     BUTTON_REMOVE_SELECTER_LOCATOR = (By.XPATH, '//li[@data-test="remove"]')
+
+    INPUT_EDIT_NAME_SEGMENT_LOCATOR = (By.XPATH, '//input[@maxlength="60"]')
