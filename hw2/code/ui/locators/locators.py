@@ -21,10 +21,6 @@ class CabinetPageLocators(BasePageLocators):
     DIV_INSTROCTION_LOCATOR = (By.XPATH, '//div[@class="instruction-module-title-zPmY3V"]')
 
 
-class ProPageLocators(BasePageLocators):
-    pass
-
-
 class CampaignPageLocators(CabinetPageLocators):
     CAMPAIGN_TRAFIC_LOCATOR = (By.XPATH, '//div[contains(@class, "_traffic")]')
     INPUT_URL_ADS_LOCATOR = (By.XPATH, '/html/body/div[1]/div[2]/div[1]/div/div[2]/div[2]/div[2]/div/div[1]/div[2]/div/div[4]/div[2]/div/div[3]/div[1]/div/div[1]/div/div/input')
@@ -35,7 +31,6 @@ class CampaignPageLocators(CabinetPageLocators):
     INPUT_UPLOAD_IMAGE_LOCATOR = (By.XPATH, '//input[@type="file" and @data-test="image_240x400"]')
     BUTTON_SAVE_ADS_LOCATOR = (By.XPATH, '/html/body/div[1]/div[2]/div[1]/div/div[2]/div[2]/div[2]/div/div[1]/div[2]/div/div[4]/div[6]/div/div[4]/div/div[3]/div[1]/div')
     INPUT_CLEAR_BUTTON_LOCATOR = (By.XPATH, '//div[contains(@class, "input__clear")]')
-
     INPUT_SEARCH_CAMPAIGN_LOCATOR = (By.XPATH, '//input[contains(@class,"searchInput")]')
     
 
@@ -44,18 +39,13 @@ class AudiencePageLocators(CabinetPageLocators):
     CHECK_BOX_LOCATOR = (By.XPATH,'/html/body/div[1]/div[4]/div/div[2]/div/div[2]/div/div[2]/div[2]/div/div[2]/div/div/div[1]/input')
     HREF_CREATE_SEGMENT_LOCATOR = (By.XPATH, '//a[@href="/segments/segments_list/new/"]')
     BUTTON_CREATE_SEGMENT_LOCATOR = (By.XPATH, '//button[@class="button button_submit"]')
-    BUTTON_ADD_SEGMENT_LOCATOR = (By.XPATH,'/html/body/div[1]/div[4]/div/div[2]/div/div[2]/div/div[5]/div[1]/button/div')
-    # BUTTON_CREATE_SEGMENT_LOCATOR = (By.XPATH, '/html/body/div[1]/div[2]/div[1]/div/div[2]/div[2]/div[2]/div/div[1]/div[2]/div/div[2]/div[3]/div/div[4]/button/div')
+    BUTTON_ADD_SEGMENT_LOCATOR = (By.XPATH,'/html/body/div[1]/div[4]/div/div[2]/div/div[2]/div/div[5]/div[1]/button/div') 
     BUTTON_DELETE_SEGMENT_LOCATOR = (By.XPATH, '/html/body/div[1]/div[2]/div[1]/div/div[2]/div[2]/div[2]/div/div[1]/div[2]/div/div[6]/div/div[1]/div[1]/div/div/div/div[2]/div/div/div[6]/span')
     BUTTON_ACCEPT_DELETING_SEGMENT_LOCATOR = (By.XPATH, '/html/body/div[1]/div[4]/div/div[2]/div[2]/div[2]/button[1]/div')
     INPUT_NAME_SEGMENT_LOCATOR = (By.XPATH, '/html/body/div[1]/div[2]/div[1]/div/div[2]/div[2]/div[2]/div/div[1]/div[2]/div/div[2]/div[3]/div/div[2]/div/div/input')
-    # TEST_SEGMENT_LOCATOR = (By.XPATH, '//a[@title="Test segment"]')
     DIV_APPS_AND_GAMES_LOCATOR = (By.XPATH, '/html/body/div[1]/div[4]/div/div[2]/div/div[2]/div/div[2]/div[1]/div[8]')
-
-
     INPUT_SEARCH_SEGMENT_LOCATOR = (By.XPATH, '//input[@type="text"]')
     CHECKBOX_ALL_SELECT_LOCATOR = (By.XPATH, '//input[@type="checkbox"][1]')
     BUTTON_ACTIONS_LOCATOR = (By.XPATH, '//div[1][@data-test="select"]')
     BUTTON_REMOVE_SELECTER_LOCATOR = (By.XPATH, '//li[@data-test="remove"]')
-
     INPUT_EDIT_NAME_SEGMENT_LOCATOR = (By.XPATH, '//input[@maxlength="60"]')

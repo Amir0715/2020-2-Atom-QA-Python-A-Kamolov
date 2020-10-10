@@ -7,8 +7,8 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 from locators import BasePageLocators
 
-RETRY_COUNT = 7
-TIMEOUT = 8
+RETRY_COUNT = 10
+TIMEOUT = 10
 class BasePage(object):
 
     locators = BasePageLocators()
