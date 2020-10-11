@@ -12,5 +12,5 @@ class CabinetPage(BasePage):
         self.click(self.locators.BUTTON_CAMPAIGNS_LOCATOR)
 
     def check_auth(self):
-        return self.check_locator_to_displayed(self.locators.BUTTON_CAMPAIGNS_LOCATOR)
+        return self.check_locator_to_displayed(self.locators.BUTTON_CAMPAIGNS_LOCATOR, 3, 3)
 

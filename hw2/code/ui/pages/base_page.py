@@ -31,7 +31,7 @@ class BasePage(object):
                 element.click()
                 return
             except StaleElementReferenceException:
-                if i > RETRY_COUNT - 1 : 
+                if i > RETRY_COUNT - 1 :
                     raise
                 
 
@@ -40,9 +40,10 @@ class BasePage(object):
             timeout = TIMEOUT
         return WebDriverWait(self.driver, timeout=timeout)
 
-    def write(self, locatorInput, keys):
+    def write(self, locatorInput, keys, isclear=False):
         element = self.find(locatorInput)
-        element.clear()
+        if not isclear:
+            element.clear()
         element.send_keys(keys)
 
     def auth(self,email,password,locator=locators.BUTTON_AUTH_HEADER_LOCATOR):
@@ -51,16 +52,26 @@ class BasePage(object):
         self.write(self.locators.INPUT_PASSWORD_AUTH_LOCATOR, password)
         self.click(self.locators.BUTTON_LOG_IN_LOCATOR)
     
-    def check_locator_to_displayed(self, locator, timeout=None):
-        try:
-            if self.find(locator,timeout).is_displayed() :
-                return True
-        except TimeoutException:
-            return False
+    def check_locator_to_displayed(self, locator, timeout=None, retry_count=RETRY_COUNT):
+        for i in range(retry_count):
+            try:
+                if self.find(locator,timeout).is_displayed() :
+                    return True  
+            except TimeoutException:
+                if i > retry_count:
+                    return False
+            except StaleElementReferenceException:
+                if i > retry_count:
+                    return False
 
-    def check_locator_to_selected(self, locator, timeout=None):
-        try:
-            if self.find(locator,timeout).is_selected() :
-                return True
-        except TimeoutException:
-            return False
+    def check_locator_to_selected(self, locator, timeout=None,retry_count=RETRY_COUNT):
+        for i in range(retry_count):
+            try:
+                if self.find(locator,timeout).is_selected() :
+                    return True  
+            except TimeoutException:
+                if i > retry_count:
+                    return False
+            except StaleElementReferenceException:
+                if i > retry_count:
+                    return False
