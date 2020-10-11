@@ -1,3 +1,4 @@
+import time
 from selenium.webdriver.common.by import By
 from locators import AudiencePageLocators
 from cabinet_page import CabinetPage
@@ -47,7 +48,9 @@ class AudiencePage(CabinetPage):
         li = '//li[@title="'+name+'"]'
         TEST_SEGMENT_LOCATOR = (By.XPATH,xpath)
         LI_SEGMENT_SEARCH_LOCATOR = (By.XPATH, li)
+        time.sleep(3)
         self.go_to_audience()
+        
         self.write(self.locators.INPUT_SEARCH_SEGMENT_LOCATOR, name, True)
         if self.check_locator_to_displayed(LI_SEGMENT_SEARCH_LOCATOR, 5, 5):
             self.click(LI_SEGMENT_SEARCH_LOCATOR)
@@ -57,3 +60,5 @@ class AudiencePage(CabinetPage):
         
         else:
             return False
+
+        
