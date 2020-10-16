@@ -2,14 +2,14 @@ import datetime
 import pytest
 from selenium.webdriver.common.by import By
 
-from some_fixtures import *
-from base import BaseCase
-from cabinet_page import CabinetPage
+from ui.fixtures.some_fixtures import *
+from tests.base import BaseCase
+from ui.pages.cabinet_page import CabinetPage
 
 
 class Test(BaseCase):    
     
-    # @pytest.mark.skip
+
     @pytest.mark.UI
     @pytest.mark.parametrize('BUTTON_LOCATOR' , ['BUTTON_AUTH_BODY_LOCATOR', 'BUTTON_AUTH_HEADER_LOCATOR'] )
     def test_button_auth(self,BUTTON_LOCATOR : str):
@@ -18,7 +18,7 @@ class Test(BaseCase):
         assert "Вход в рекламный кабинет" in self.driver.page_source
 
 
-    # @pytest.mark.skip
+    
     @pytest.mark.UI
     @pytest.mark.parametrize('BUTTON_LOCATOR', ['BUTTON_AUTH_BODY_LOCATOR', 'BUTTON_AUTH_HEADER_LOCATOR'])
     def test_positive_auth_via_button(self, BUTTON_LOCATOR : str):
@@ -27,7 +27,7 @@ class Test(BaseCase):
         assert self.cabinet_page.check_auth()
 
     
-    # @pytest.mark.skip
+    
     @pytest.mark.UI
     @pytest.mark.parametrize('BUTTON_LOCATOR', ['BUTTON_AUTH_BODY_LOCATOR', 'BUTTON_AUTH_HEADER_LOCATOR'])
     def test_negetiv_auth_via_button_invalid_email(self, BUTTON_LOCATOR : str):
@@ -42,7 +42,7 @@ class Test(BaseCase):
             assert self.cabinet_page.check_auth()
 
 
-    # @pytest.mark.skip
+    
     @pytest.mark.UI
     @pytest.mark.parametrize('BUTTON_LOCATOR', ['BUTTON_AUTH_BODY_LOCATOR', 'BUTTON_AUTH_HEADER_LOCATOR'])
     def test_negetiv_auth_via_button_invalid_password(self, BUTTON_LOCATOR : str):
@@ -57,7 +57,7 @@ class Test(BaseCase):
             assert self.cabinet_page.check_auth()
 
 
-    # @pytest.mark.skip
+    
     @pytest.mark.UI
     def test_create_segment(self, auto_auth):
         self.cabinet_page : CabinetPage = auto_auth
@@ -69,7 +69,7 @@ class Test(BaseCase):
         assert self.audience_page.check_segment(name)
         
 
-    # @pytest.mark.skip
+
     @pytest.mark.UI
     def test_delete_segment(self, auto_auth):
         self.cabinet_page : CabinetPage = auto_auth
@@ -87,13 +87,13 @@ class Test(BaseCase):
             assert self.audience_page.check_segment(name)
 
 
-    # @pytest.mark.skip
+
     @pytest.mark.UI
     def test_create_campaign(self, auto_auth):
         self.cabinet_page : CabinetPage = auto_auth
         self.cabinet_page.go_to_campaigns()
 
         name = 'Test campaign ' + datetime.datetime.today().strftime("%H:%M:%S:%f")
-
-        self.campaign_page.create_campaign(name,self.base_page.path_to_file)
+        
+        self.campaign_page.create_campaign(name, self.base_page.path_to_file)
         assert self.campaign_page.check_campaign(name)

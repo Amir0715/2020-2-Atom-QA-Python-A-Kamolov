@@ -1,11 +1,10 @@
-from conftest import config
 import selenium
+import os
 from selenium.common.exceptions import StaleElementReferenceException, TimeoutException
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
-
-from locators import BasePageLocators
+from ui.locators.locators import BasePageLocators
 
 RETRY_COUNT = 10
 TIMEOUT = 10
@@ -17,7 +16,7 @@ class BasePage(object):
         self.driver = driver
         self.EMAIL = 'kamolov.amir2000@yandex.ru'
         self.PASSWORD = 'x4r-zbC-SYM-gj8'
-        self.path_to_file='/home/amir-kamolov/photo/cat.jpg'
+        self.path_to_file = os.path.dirname(os.path.abspath(__file__)) + '/data/cat.jpg'
         
         
     def find(self, locator, timeout=None) -> WebElement:

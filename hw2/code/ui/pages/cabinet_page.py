@@ -1,5 +1,5 @@
-from base_page import BasePage
-from locators import CabinetPageLocators
+from ui.pages.base_page import BasePage
+from ui.locators.locators import CabinetPageLocators
 
 
 class CabinetPage(BasePage):

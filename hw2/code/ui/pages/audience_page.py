@@ -1,7 +1,7 @@
 import time
 from selenium.webdriver.common.by import By
-from locators import AudiencePageLocators
-from cabinet_page import CabinetPage
+from ui.locators.locators import AudiencePageLocators
+from ui.pages.cabinet_page import CabinetPage
 
 class CanNotCreateSegmentException(Exception):
     pass

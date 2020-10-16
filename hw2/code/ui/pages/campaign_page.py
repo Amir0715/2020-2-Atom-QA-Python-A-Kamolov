@@ -1,5 +1,5 @@
-from cabinet_page import CabinetPage
-from locators import CampaignPageLocators
+from ui.pages.cabinet_page import CabinetPage
+from ui.locators.locators import CampaignPageLocators
 from selenium.webdriver.common.by import By
 
 class CampaignPage(CabinetPage):
