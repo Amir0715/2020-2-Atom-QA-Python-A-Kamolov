@@ -3,12 +3,12 @@ from psycopg2.extras import DictCursor
 
 class PostgreClient(object):
 
-    def __init__(self, user, password, db_name):
+    def __init__(self, user, password, db_name, host='127.0.0.1', port=5432):
         self.user = user
         self.password = password
         self.db_name = db_name
-        self.host = '127.0.0.1'
-        self.port = 32768
+        self.host = host
+        self.port = port
         self.charset = 'utf8'
 
         self.cursor = self.connect()

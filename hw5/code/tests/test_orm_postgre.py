@@ -4,6 +4,7 @@ from code.conftest import postgre_orm_client
 from code.postgre_client.orm_client import PostgreOrmClient
 from code.models.models import *
 
+@pytest.mark.skip()
 class TestOrmPostgre:
     @pytest.fixture(scope='function', autouse=True)
     def setup(self, postgre_orm_client):

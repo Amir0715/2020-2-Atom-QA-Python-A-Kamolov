@@ -3,12 +3,12 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.session import Session
 
 class PostgreOrmClient(object):
-    def __init__(self,user, password, db_name):
+    def __init__(self,user, password, db_name, host='127.0.0.1', port=5432):
         self.user = user
         self.password = password
         self.db_name = db_name
-        self.host = '127.0.0.1'
-        self.port = 32768
+        self.host = host
+        self.port = port
         self.charset = 'utf8'
 
         self.connection = self.connect() 
@@ -31,9 +31,9 @@ class PostgreOrmClient(object):
         connection = self.get_connection(db_created=False)
         
         connection.execute('commit')
-        connection.execute('DROP DATABASE IF EXISTS TEST_PYTHON_ORM')
+        connection.execute("DROP DATABASE IF EXISTS {} ".format(self.db_name))
         connection.execute('commit')
-        connection.execute('CREATE DATABASE TEST_PYTHON_ORM')
+        connection.execute('CREATE DATABASE {}'.format(self.db_name))
         connection.close()
 
         return self.get_connection(db_created=True)

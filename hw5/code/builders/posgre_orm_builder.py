@@ -1,7 +1,7 @@
 from code.builders.postgre_builder import PostgreBuilder
 from faker import Faker
 
-from code.models.models import Base, Prepod, Student
+from code.models.model import *
 
 from code.postgre_client.orm_client import PostgreOrmClient
 
@@ -13,44 +13,67 @@ class PostgreOrmBuilder(object):
         self.client = client
         self.engine = self.client.connection.engine
 
-        self.create_prepods()
-        self.create_students()
+        self.create_CountsOfReq()
+        self.create_TopTenSize()
+        self.create_TopTenSizeWithServerError()
+        self.create_TopTenCountWithUserError()
 
-    def create_prepods(self):
-        if not self.engine.dialect.has_table(self.engine, 'prepods'):
-            Base.metadata.tables['prepods'].create(self.engine)
 
-    def create_students(self):
-        if not self.engine.dialect.has_table(self.engine, 'students'):
-            Base.metadata.tables['students'].create(self.engine)
+    def create_CountsOfReq(self):
+        if not self.engine.dialect.has_table(self.engine, 'CountsOfReq'):
+            Base.metadata.tables['CountsOfReq'].create(self.engine)
 
-    def add_prepod(self):
-        # Создаем запись в таблице 'prepods' через класс Prepod
-        prepod = Prepod(
-            name=fake.first_name(),
-            surname=fake.last_name(),
-            start_teaching=fake.date()
+    def create_TopTenSize(self):
+        if not self.engine.dialect.has_table(self.engine, 'TopTenSize'):
+            Base.metadata.tables['TopTenSize'].create(self.engine)
+    
+    def create_TopTenCountWithUserError(self):
+        if not self.engine.dialect.has_table(self.engine, 'TopTenCountWithUserError'):
+            Base.metadata.tables['TopTenCountWithUserError'].create(self.engine)
+
+    def create_TopTenSizeWithServerError(self):
+        if not self.engine.dialect.has_table(self.engine, 'TopTenSizeWithServerError'):
+            Base.metadata.tables['TopTenSizeWithServerError'].create(self.engine)
+
+    def add_CountOfReq(self,get,post,all):
+        count = CountsOfReq(
+            count_get_req=get,
+            count_post_req=post,
+            count_all_req=all
         )
 
-        # Сохраняем объект в сесси, открытой в client
-        self.client.session.add(prepod)
-        # Записываем созданную запись в базу
+        self.client.session.add(count)
         self.client.session.commit()
-        # Возвращаем объект для работы из тестов
-        return prepod
+        return count
 
-    def add_students(self, prepod_id=None, count=10):
-        for _ in range(count):
-            # Создаем нового студента
-            student = Student(name=fake.first_name())
+    def add_TopTenSize(self,req,code,size):
+        topTen = CountsOfReq(
+            req=req,
+            code=code,
+            size=size
+        )
 
-            if prepod_id is None:
-                # Генерируем случайного препода, запоминаем его id
-                prepod_id = self.add_prepod().id
+        self.client.session.add(topTen)
+        self.client.session.commit()
+        return topTen
 
-            # Указываем преподавателя для студента
-            student.prepod_id = prepod_id
+    def add_TopTenCountWithUserError(self,req,count):
+        topTen = CountsOfReq(
+            req=req,
+            count=count
+        )
 
-            # Записываем созданную модуль в базу
-            self.client.session.add(student)
-            self.client.session.commit()
+        self.client.session.add(topTen)
+        self.client.session.commit()
+        return topTen
+
+    def add_TopTenSizeWithServerError(self,req,code,size):
+        topTen = CountsOfReq(
+            req=req,
+            code=code,
+            size=size
+        )
+
+        self.client.session.add(topTen)
+        self.client.session.commit()
+        return topTen
