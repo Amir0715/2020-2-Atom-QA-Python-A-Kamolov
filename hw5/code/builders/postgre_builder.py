@@ -1,4 +1,4 @@
-from code.postgre_client.client import PostgreClient
+from postgre_client.client import PostgreClient
 
 
 class PostgreBuilder(object):

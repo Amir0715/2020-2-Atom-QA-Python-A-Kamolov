@@ -1,9 +1,9 @@
-from code.builders.postgre_builder import PostgreBuilder
+from builders.postgre_builder import PostgreBuilder
 from faker import Faker
 
-from code.models.model import *
+from models.model import *
 
-from code.postgre_client.orm_client import PostgreOrmClient
+from postgre_client.orm_client import PostgreOrmClient
 
 fake = Faker(locale='ru_RU')
 
@@ -47,7 +47,7 @@ class PostgreOrmBuilder(object):
         return count
 
     def add_TopTenSize(self,req,code,size):
-        topTen = CountsOfReq(
+        topTen = TopTenSize(
             req=req,
             code=code,
             size=size
@@ -58,7 +58,7 @@ class PostgreOrmBuilder(object):
         return topTen
 
     def add_TopTenCountWithUserError(self,req,count):
-        topTen = CountsOfReq(
+        topTen = TopTenCountWithUserError(
             req=req,
             count=count
         )
@@ -68,7 +68,7 @@ class PostgreOrmBuilder(object):
         return topTen
 
     def add_TopTenSizeWithServerError(self,req,code,size):
-        topTen = CountsOfReq(
+        topTen = TopTenSizeWithServerError(
             req=req,
             code=code,
             size=size
