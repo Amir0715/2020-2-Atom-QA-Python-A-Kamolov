@@ -1,10 +1,22 @@
-from pandas.core.indexes import base
-from sqlalchemy import Column, Integer, String, Date, ForeignKey
+from sqlalchemy import Column, Integer
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.sql.sqltypes import VARCHAR
+from sqlalchemy.sql.sqltypes import VARCHAR, String
 
 Base = declarative_base()
 
+
+class Student(Base):
+    __tablename__ = 'students'
+    __table_args = {'mysql_charset': 'utf8'}
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    name = Column(String, nullable=False)
+
+    def __repr__(self):
+        return f"<Student(" \
+               f"id='{self.id}'," \
+               f"name='{self.name}'" \
+               f")>"
 
 class CountsOfReq(Base):
     __tablename__ = 'CountsOfReq'
