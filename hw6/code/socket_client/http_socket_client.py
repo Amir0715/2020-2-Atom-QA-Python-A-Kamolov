@@ -1,19 +1,35 @@
 import json
 import socket
+import time
 
 
 # КЛИЕНТ
+
 
 class SocketClient:
     def __init__(self, host, port):
         self.target_host = host
         self.target_port = port
-        self.client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.client.settimeout(0.1)
-        self.client.connect((self.target_host, self.target_port))
 
-    def get(self):
-        request = 'GET / HTTP/1.1\r\n' + \
+    def _set_connection(self, timeout):
+        start = int(time.time())
+        end = start + timeout
+        self.client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.client.settimeout(4)
+        status = 1
+        while int(time.time()) < end:
+            try:
+                status = self.client.connect_ex((self.target_host, self.target_port))
+                if status == 0:
+                    return status
+            except Exception:
+                pass
+        if status != 0:
+            raise ConnectionRefusedError
+
+    def get(self, params):
+        self._set_connection(4)
+        request = 'GET {params} HTTP/1.1\r\n'.format(params=params) + \
                   'Host:{host}\r\n\r\n'.format(host=self.target_host + ':' + str(self.target_port))
 
         self.client.send(request.encode())
@@ -28,9 +44,10 @@ class SocketClient:
                 break
 
         data = ''.join(total_data).splitlines()
-        return data[-1]
+        return json.loads(data[-1])
 
     def post(self, params, data):
+        self._set_connection(4)
         body_bytes = data.encode()
         req = f'POST {params} HTTP/1.1\r\n' + \
               'Host: {host}\r\n'.format(host=self.target_host + ':' + str(self.target_port)) + \
@@ -46,12 +63,12 @@ class SocketClient:
                 total_data.append(data.decode())
             else:
                 break
-
+        self.client.close()
         data = ''.join(total_data).splitlines()
-        return data[-1]
+        return json.loads(data[-1])
 
-
-    def put(self,params,data):
+    def put(self, params, data):
+        self._set_connection(4)
         body_bytes = data.encode()
         req = f'PUT {params} HTTP/1.1\r\n' + \
               'Host: {host}\r\n'.format(host=self.target_host + ':' + str(self.target_port)) + \
@@ -69,15 +86,7 @@ class SocketClient:
                 break
 
         data = ''.join(total_data).splitlines()
-        return data[-1]
-
-if __name__ == '__main__':
-    s = SocketClient('127.0.0.1', 9090)
-    data = json.dumps({'login': 'macho',
-     'password': 'ass'})
-    data1 = json.dumps({'login': 'amir',
-     'password': 'oss'})
-    data2 = json.dumps({'login': 'pop',
-                        'password': 'looa'})
-    res = s.put('/', data2)
-    print(res)
+        if len(data) != 0:
+            return json.loads(data[-1])
+        else:
+            return None
