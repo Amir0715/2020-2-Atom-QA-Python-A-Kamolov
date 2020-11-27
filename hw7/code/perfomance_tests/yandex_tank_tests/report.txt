@@ -1,0 +1,8 @@
+const:
+https://overload.yandex.net/357696#tab=test_data&tags=&plot_groups=main&machines=&metrics=&slider_start=1606493379&slider_end=1606493409
+
+line:
+https://overload.yandex.net/357702#tab=test_data&tags=&plot_groups=main&machines=&metrics=&slider_start=1606493598&slider_end=1606493628&compress_ratio=1
+
+step:
+https://overload.yandex.net/357704#tab=test_data&tags=&plot_groups=main&machines=&metrics=&slider_start=1606493754&slider_end=1606493934
