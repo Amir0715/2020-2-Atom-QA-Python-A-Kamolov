@@ -1,0 +1,16 @@
+overload:
+  enabled: true
+  token_file: /var/loadtest/token.txt
+  package: yandextank.plugins.DataUploader
+  job_name: qa_hw7_line
+  job_dsc: qa_hw7_line_description
+phantom:
+  address: 192.168.1.42:5555
+  ammofile: /var/loadtest/ammo.txt
+  load_profile:
+    load_type: rps
+    schedule: line(1,5,30)
+console:
+  enabled: false
+telegraf:
+  enabled: false
